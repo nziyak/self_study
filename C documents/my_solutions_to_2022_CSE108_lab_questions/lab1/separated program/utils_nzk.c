@@ -1,11 +1,12 @@
 #include "utils_nzk.h"
 
-int* midpoint(int x1, int y1, int x2, int y2)
+int* midpoint(int x1, int y1, int x2, int y2, int* pts)
 {
     int mpx = (x1 + x2) / 2;
     int mpy = (y1 + y2) / 2;
     
-    int pts[2] = {mpx,mpy};
+    pts[0] = mpx;
+    pts[1] = mpy;
 
     return pts;
 }
@@ -15,15 +16,6 @@ double slopeCal(int x1, int y1, int x2, int y2)
     double slope = (y2 - y1) / (x2 - x1);
     
     return slope;
-}
-
-double areaCal(int x1, int y1, int* pts)
-{
-    double radius = mySqrt(((x1 + *pts) * (x1 + *pts)) + ((y1 + *(pts+1)) * (y1 + *(pts+1))));
-    
-    double area = PI * radius * radius; 
-
-    return area;
 }
 
 double mySqrt(double num) 
@@ -36,11 +28,22 @@ double mySqrt(double num)
     
     while(1) 
     {
-        float new_prediction = 0.5 * (prediction + num / prediction); // calculate the new prediction using Newton - Ralph method
+        double new_prediction = 0.5 * (prediction + num / prediction); // calculate the new prediction using Newton - Ralph method
         
         if(fabs(new_prediction - prediction) < error) // Check the error
             return new_prediction;
         
         prediction = new_prediction; // Loop again with the new prediction
     }
+}
+
+double areaCal(int x1, int y1, int* pts)
+{
+    double toBeSqrt = (x1 - *pts) * (x1 - *pts) + (y1 - *(pts+1)) * (y1 - *(pts+1));
+
+    double radius = mySqrt(toBeSqrt);
+        
+    double area = PI * radius * radius; 
+
+    return area;
 }
