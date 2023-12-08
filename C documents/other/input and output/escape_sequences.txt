@@ -1,0 +1,9 @@
+\b      move back one space
+\f      move to next page
+\n      move to next line
+\r      carriage return
+\t      move to next tab setting
+\\      backslash character
+\'      single quote
+\nnn    treat nnn as an octal number
+\"      double quote
