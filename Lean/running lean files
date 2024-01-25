@@ -1,2 +1,0 @@
-open the terminal in the folder which containts the lean file.
-type lean --run programName.lean
